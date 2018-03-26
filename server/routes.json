@@ -1,0 +1,3 @@
+{
+  "/articles\\?id=:id": "/posts/:id"
+}

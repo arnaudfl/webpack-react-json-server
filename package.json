@@ -6,12 +6,12 @@
     "type": "git",
     "url": "https://github.com/arnaudfl/webpack-react-json-server.git"
   },
-  "author": "arnaudfl",
-  "license": "",
+  "author": "Arnaud F.",
+  "license": "MIT",
   "scripts": {
     "generate-mock": "node server/generate.js",
     "dev-server": "nodemon server/server.js localhost 4000",
-    "dev-watch": "webpack-dev-server --port 8081"
+    "dev-watch": "webpack-dev-server --port 9000"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -28,6 +28,7 @@
     "faker": "^4.1.0",
     "file-loader": "^1.1.11",
     "json-server": "^0.12.1",
+    "nodemon": "^1.17.2",
     "path": "^0.12.7",
     "progress-bar-webpack-plugin": "^1.11.0",
     "style-loader": "^0.20.2",

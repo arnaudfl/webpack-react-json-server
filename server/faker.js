@@ -1,27 +1,31 @@
 const faker = require('faker');
 
-generateClients = () => {
-  let clients = [];
+generateUsers = () => {
+  let users = [];
 
   for (let i=1; i<10; i++) {
     const companyName = faker.company.companyName();
-    const address = faker.address.streetAdress();
+    const address = faker.address.streetAddress();
+    const city = faker.address.city();
+    const zipCode = faker.address.zipCode();
 
     const date = faker.date.recent();
     const status = Math.random() >= 0.5;
 
-    clients.push({
+    users.push({
       id: `${i}`,
-      client: {
+      user: {
         companyName,
         address,
+        city,
+        zipCode
       },
       active: status,
       date
     })
   }
 
-  return { clients };
+  return { users };
 };
 
-module.exports = generateClients;
+module.exports = generateUsers;
