@@ -76,7 +76,7 @@ module.exports = {
     progress: true,
 
     host: 'localhost',
-    port: 8081,
+    port: 9000,
     proxy: {
       '/api/**': {
         target: 'http://localhost:4000',
