@@ -1,7 +1,8 @@
 "use strict"
 
-var path = require('path');
-var webpack = require("webpack");
+const path = require('path');
+const merge = require('webpack-merge');
+const webpack = require("webpack");
 
 // webpack plugins
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -12,12 +13,12 @@ const PATHS = {
   output: path.join(__dirname, 'public/compiled')
 };
 
-module.exports = {
-  devtool: 'eval-source-map',
-  entry: [
-    'react-hot-loader/patch',
-    PATHS.src
-  ],
+const DEV = 'production' !== process.env.NODE_ENV;
+
+const common = {
+  entry: {
+    app: PATHS.src
+  },
   output: {
     path: PATHS.dist,
     filename: 'bundle.js',
@@ -49,15 +50,6 @@ module.exports = {
         include: [PATHS.src],
       },
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader?importLoaders=1&sourceMap',
-          ]
-        })
-      },
-      {
         test: /\.(ttf|eot|svg|woff|woff2)(\?.*)?$/,
         use: [
           'file-loader?name=fonts/[name].[ext]',
@@ -68,25 +60,49 @@ module.exports = {
       }
     ]
   },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: PATHS.dist,
-    hot: true,
-    inline: true,
-    progress: true,
-
-    host: 'localhost',
-    port: 9000,
-    proxy: {
-      '/api/**': {
-        target: 'http://localhost:4000',
-        secure: false,
-        changeOrigin: true
-      }
-    }
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin('bundle.css')
-  ]
 };
+
+if (DEV) {
+  module.exports = merge(common, {
+    devtool: 'eval-source-map',
+    entry: [
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://localhost:9000',
+      'webpack/hot/only-dev-server',
+      PATHS.src
+    ],
+    devServer: {
+      historyApiFallback: true,
+      contentBase: PATHS.dist,
+      hot: true,
+      inline: true,
+
+      host: 'localhost',
+      port: 9000,
+      proxy: {
+        '/api/**': {
+          target: 'http://localhost:4000',
+          secure: false,
+          changeOrigin: true,
+        }
+      },
+    },
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          loader: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              'css-loader?importLoaders=1&sourceMap',
+            ]
+          })
+        },
+      ]
+    },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new ExtractTextPlugin('bundle.css'),
+    ]
+  });
+}
