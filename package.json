@@ -11,7 +11,8 @@
   "scripts": {
     "generate-mock": "node server/generate.js",
     "dev-server": "nodemon server/server.js localhost 4000",
-    "dev-watch": "webpack-dev-server --port 9000"
+    "dev-watch": "webpack-dev-server --port 9000",
+    "start": "concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run dev-watch\""
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -20,6 +21,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "concurrently": "^3.5.1",
     "css-loader": "^0.28.9",
     "eslint": "^4.16.0",
     "eslint-loader": "^2.0.0",
@@ -37,6 +39,7 @@
     "webpack-merge": "^4.1.2"
   },
   "dependencies": {
+    "moment": "^2.21.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-hot-loader": "^3.1.3"
