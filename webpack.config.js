@@ -13,6 +13,11 @@ const PATHS = {
   output: path.join(__dirname, 'public/compiled')
 };
 
+const PORTS = {
+  app: 9000,
+  api: 4000
+};
+
 const DEV = 'production' !== process.env.NODE_ENV;
 
 const common = {
@@ -42,10 +47,7 @@ const common = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['env', 'react']
-          }
+          loader: 'babel-loader'
         },
         include: [PATHS.src],
       },
@@ -67,7 +69,7 @@ if (DEV) {
     devtool: 'eval-source-map',
     entry: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:9000',
+      'webpack-dev-server/client?http://localhost:' + PORTS.app,
       'webpack/hot/only-dev-server',
       PATHS.src
     ],
@@ -76,14 +78,15 @@ if (DEV) {
       contentBase: PATHS.dist,
       hot: true,
       inline: true,
+      progress: true,
 
       host: 'localhost',
-      port: 9000,
+      port: PORTS.app,
       proxy: {
         '/api/**': {
-          target: 'http://localhost:4000',
+          target: 'http://localhost:' + PORTS.api,
           secure: false,
-          changeOrigin: true,
+          changeOrigin: true
         }
       },
     },
@@ -102,6 +105,7 @@ if (DEV) {
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoEmitOnErrorsPlugin(),
       new ExtractTextPlugin('bundle.css'),
     ]
   });
