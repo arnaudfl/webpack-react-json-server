@@ -11,18 +11,18 @@ server.use(middlewares);
 
 server.use(bodyParser); // important to use body returned with server response
 
-// just an example to catch url when update date for an user
-server.patch('/users/:id/date', function (req, res) {
-  // Call next() if you want to let JSON Server router handle the rest
-  //
-  // If needed, you can access database using router.db
-  // It's a lowdb instance, you can find documentation here:
-  // https://github.com/typicode/lowdb
-
-  // just testing status 500 on user ID 1
-  if ('1' === req.params.id) {
-    return res.status(500).jsonp({ message: 'error_occurred' });
+// just an example to catch url when update status for an user
+server.post('/users/:id/status', function (req, res) {
+  const user = apiEndpoints.db
+      .get('users')
+      .find({ id: req.params.id })
+      .assign({ active: req.body.newStatus })
+      .write();
+  if (user) {
+    console.log(`updated status to ${req.body.newStatus} for client ID ${req.params.id}`);
+    return res.jsonp({ message: 'Status updated successfully!' });
   }
+  return res.status(404).jsonp({ message: `User ID #${req.params.id} not found` });
 });
 
 server.use(apiEndpoints);
