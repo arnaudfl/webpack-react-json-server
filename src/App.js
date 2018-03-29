@@ -68,7 +68,7 @@ class App extends Component {
         <div className="jumbotron">
           <h1 className="display-5">Webpack React JSON Server</h1>
           <p className="lead">
-            Simple Webpack React demo, with JSON Server and NodeJS
+            Simple Webpack React demo, using a fake REST API with JSON Server and NodeJS
           </p>
         </div>
     );
