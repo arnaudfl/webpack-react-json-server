@@ -1,6 +1,6 @@
 # Webpack React JSON Server
 
-Project with JSON Server to use a fake REST API with Webpack and React [WIP]
+Simple Webpack React demo, using a fake REST API with JSON Server and NodeJS [WIP]
 
 ## Requirements
 
