@@ -1,5 +1,4 @@
 const express = require('express');
-var proxy = require('http-proxy-middleware');
 const api = require('./api');
 
 const port = 4000;

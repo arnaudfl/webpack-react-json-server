@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import moment from 'moment';
-import logo from './logo.svg';
 import './App.css';
 
 import Api from './api/Api';
@@ -66,24 +64,19 @@ class App extends Component {
 
   render() {
 
-    const Header = () => {
-      return (
-        <div>
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Webpack React JSON Server</h1>
-          </header>
-          <p className="App-intro">
-            Simple demo for a project using React with Webpack, linked with JSON Server launched by NodeJS.
+    const Header = () => (
+        <div className="jumbotron">
+          <h1 className="display-5">Webpack React JSON Server</h1>
+          <p className="lead">
+            Simple Webpack React demo, with JSON Server and NodeJS
           </p>
         </div>
-      );
-    };
+    );
 
     if (this.state.isLoading) {
       return (
         <div className="App container">
-          { Header() }
+          <Header />
           <div className="preloader">
             <div className="loader-small" />
           </div>
@@ -94,7 +87,7 @@ class App extends Component {
     if (0 === this.state.list.length) {
       return (
           <div className="App container">
-            { Header() }
+            <Header />
             <div className="alert alert-dark" role="alert">
               No results!
             </div>
@@ -104,7 +97,7 @@ class App extends Component {
 
     return (
       <div className="App container">
-        { Header() }
+        <Header />
         <div className="alerts">
           {this.state.error && ('string' === typeof this.state.error) &&
             <Alert message={this.state.error} error />
