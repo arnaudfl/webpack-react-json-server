@@ -8,10 +8,10 @@
   },
   "author": "Arnaud F.",
   "license": "MIT",
-  "proxy": "http://localhost:4000",
+  "proxy": "http://localhost:4000/api",
   "scripts": {
     "generate-mock": "node server/generate.js",
-    "dev-server": "nodemon --delay 500ms server/server.js localhost 4000",
+    "dev-server": "nodemon server/server.js localhost 4000",
     "dev-watch": "webpack-dev-server --host localhost --port 9000",
     "start": "concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run dev-watch\""
   },
