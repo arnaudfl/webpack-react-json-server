@@ -1,6 +1,6 @@
 {
   "name": "webpack-react-json-server",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "React Project with JSON Server",
   "repository": {
     "type": "git",
