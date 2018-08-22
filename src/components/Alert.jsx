@@ -7,7 +7,7 @@ class Alert extends Component {
     $('.alert').hide();
   }
 
-  componentWillMount() {
+  componentDidMount() {
     $('.alert').show();
   }
 

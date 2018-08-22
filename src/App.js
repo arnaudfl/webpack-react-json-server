@@ -20,7 +20,7 @@ class App extends Component {
     this._onClickToggleStatus = this._onClickToggleStatus.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     Api.list().then(data => {
       this.setState({
         list: data.list || [],
