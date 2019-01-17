@@ -66,6 +66,7 @@ const common = {
 
 if (DEV) {
   module.exports = merge(common, {
+    mode: 'development',
     devtool: 'eval-source-map',
     entry: [
       'react-hot-loader/patch',
