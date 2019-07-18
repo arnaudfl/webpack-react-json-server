@@ -14,7 +14,7 @@ const PATHS = {
 };
 
 const PORTS = {
-  app: 9000,
+  app: 8080,
   api: 4000
 };
 
